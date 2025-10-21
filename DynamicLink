@@ -1,28 +1,60 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="sv">
 <head>
   <meta charset="UTF-8">
-  <title>Redirecting...</title>
+  <title>Omdirigerar...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script>
-    window.onload = function () {
-      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-      // Dina faktiska länkar
-      const iosLink = "https://apps.apple.com/se/app/garantera/id6733228143";
-      const androidLink = "https://play.google.com/store/apps/details?id=com.ebeco.ebecoconnect&hl=svoch";
-      const desktopLink = "https://www.ebeco.se"; // Du kan ändra denna till valfri webbsida
-
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = iosLink;
-      } else if (/android/i.test(userAgent)) {
-        window.location.href = androidLink;
-      } else {
-        window.location.href = desktopLink;
+    (function () {
+      function isIOS() {
+        // Täcker iPhone, iPad, iPod samt iPadOS 13+ som ibland rapporterar "Mac"
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+               (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
       }
-    };
+
+      function isAndroid() {
+        return /android/i.test(navigator.userAgent);
+      }
+
+      // Dina faktiska länkar (korrigerade)
+      const iosLink = "https://apps.apple.com/se/app/garantera/id6733228143";
+      const androidLink = "https://play.google.com/store/apps/details?id=com.ebeco.ebecoconnect";
+      const desktopLink = "https://www.ebeco.se";
+
+      function redirect() {
+        try {
+          if (isIOS()) {
+            window.location.replace(iosLink);
+          } else if (isAndroid()) {
+            window.location.replace(androidLink);
+          } else {
+            window.location.replace(desktopLink);
+          }
+        } catch (e) {
+          // Om något går snett – gå till desktop som sista utväg
+          window.location.href = desktopLink;
+        }
+      }
+
+      // Kör så fort DOM är redo
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', redirect);
+      } else {
+        redirect();
+      }
+    })();
   </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=https://www.ebeco.se">
+  </noscript>
 </head>
 <body>
-  <p>Redirecting to the correct app...</p>
+  <p>Omdirigerar dig till rätt app...</p>
+  <p style="margin-top:1rem;font-size:0.9rem;">
+    Om inget händer, klicka:
+    https://apps.apple.com/se/app/garantera/id6733228143iOS</a> ·
+    https://play.google.com/store/apps/details?id=com.ebeco.ebecoconnect&hl=sv&gl=SEAndroid</a> ·
+    https://www.ebeco.seDesktop</a>
+  </p>
 </body>
 </html>
