@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="eng">
 <head>
   <meta charset="UTF-8">
-  <title>Omdirigerar...</title>
+  <title>Redirecting...</title>
   <script>
     window.onload = function () {
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -23,6 +23,6 @@
   </script>
 </head>
 <body>
-  <p>Omdirigerar dig till rätt app...</p>
+  <p>Redirecting to the correct app...</p>
 </body>
 </html>
