@@ -7,19 +7,16 @@
   <script>
     (function () {
       function isIOS() {
-        // Täcker iPhone, iPad, iPod samt iPadOS 13+ som ibland rapporterar "Mac"
         return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
       }
-
       function isAndroid() {
         return /android/i.test(navigator.userAgent);
       }
 
-      // Dina faktiska länkar (korrigerade)
       const iosLink = "https://apps.apple.com/se/app/garantera/id6733228143";
       const androidLink = "https://play.google.com/store/apps/details?id=com.ebeco.ebecoconnect";
-      const desktopLink = "https://www.ebeco.se";
+      const desktopLink = "https://www.ebeco.se"; // ändra om du vill
 
       function redirect() {
         try {
@@ -31,12 +28,10 @@
             window.location.replace(desktopLink);
           }
         } catch (e) {
-          // Om något går snett – gå till desktop som sista utväg
           window.location.href = desktopLink;
         }
       }
 
-      // Kör så fort DOM är redo
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', redirect);
       } else {
@@ -52,9 +47,10 @@
   <p>Omdirigerar dig till rätt app...</p>
   <p style="margin-top:1rem;font-size:0.9rem;">
     Om inget händer, klicka:
-    https://apps.apple.com/se/app/garantera/id6733228143iOS</a> ·
-    https://play.google.com/store/apps/details?id=com.ebeco.ebecoconnect&hl=sv&gl=SEAndroid</a> ·
+    <a href="https://apps.apple.com/se/app/garantera/id6733228143">iOS</a> ·
+    <a href="https://play.google.com/store/apps/details?id=com.ebeco.ebecoconnect&hl=sv">Android</a> ·
     https://www.ebeco.seDesktop</a>
   </p>
 </body>
 </html>
+``
