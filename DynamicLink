@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Omdirigerar...</title>
+  <script>
+    window.onload = function () {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // Dina faktiska länkar
+      const iosLink = "https://apps.apple.com/se/app/garantera/id6733228143";
+      const androidLink = "https://play.google.com/store/apps/details?id=com.ebeco.ebecoconnect&hl=svoch";
+      const desktopLink = "https://www.ebeco.se"; // Du kan ändra denna till valfri webbsida
+
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href = iosLink;
+      } else if (/android/i.test(userAgent)) {
+        window.location.href = androidLink;
+      } else {
+        window.location.href = desktopLink;
+      }
+    };
+  </script>
+</head>
+<body>
+  <p>Omdirigerar dig till rätt app...</p>
+</body>
+</html>
